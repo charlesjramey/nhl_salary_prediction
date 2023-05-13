@@ -40,14 +40,14 @@ defense_model = pickle.load(open('models/defense_model.pkl', 'rb'))
 goalies_model = pickle.load(open('models/goalies_model.pkl', 'rb'))
 
 # Load the player stats data
-forwards_stats = pd.read_csv('../../data/forwards_2023.csv')
-defense_stats = pd.read_csv('../../data/defense_2023.csv')
-goalies_stats = pd.read_csv('../../data/goalies_2023.csv')
+forwards_stats = pd.read_csv('data/forwards_2023.csv')
+defense_stats = pd.read_csv('data/defense_2023.csv')
+goalies_stats = pd.read_csv('data/goalies_2023.csv')
 
 # Load active contract data
-forward_contracts = pd.read_csv('../../data/active_contracts_f.csv')
-defense_contracts = pd.read_csv('../../data/active_contracts_d.csv')
-goalies_contracts = pd.read_csv('../../data/active_contracts_g.csv')
+forward_contracts = pd.read_csv('data/active_contracts_f.csv')
+defense_contracts = pd.read_csv('data/active_contracts_d.csv')
+goalies_contracts = pd.read_csv('data/active_contracts_g.csv')
 
 
 
