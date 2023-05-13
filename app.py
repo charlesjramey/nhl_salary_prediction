@@ -7,7 +7,7 @@ import pickle
 import time
 import locale
 
-img = Image.open(os.path.join(os.getcwd(), '..', '..', 'assets/app-icon.png'))
+img = Image.open('assets/app-icon.png')
 
 st.set_page_config(
     layout="wide",
