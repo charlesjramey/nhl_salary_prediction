@@ -1,11 +1,15 @@
 import streamlit as st
 from PIL import Image
-import os
 import pandas as pd
-import numpy as np
 import pickle
 import time
 import locale
+
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+from sklearn.linear_model import LinearRegression
+
 
 img = Image.open('assets/app-icon.png')
 
