@@ -32,7 +32,7 @@ There are many avenues to continue to explore with this data, and additional ste
 - Adjusting the data to a per-game basis.
     - For this iteration, data was left as is. A potential issue with this is that a player who played 60 games is likely to have relatively lower stats than if they played a full 82 games. The model does not account for partial seasons which may be a major hindrance to performance.
 - Testing a wider variety of model hyperparameters
-    - A more through grid search of hyperparameters for the various models may reveal more optimal paramters that improve model performance.
+    - A more thorough grid search of hyperparameters for the various models may reveal more optimal parameters that improve model performance.
     
 Overall, I learned a lot through this project, particularly about webscraping with Selenium, but also about experimental design. I believe there are multiple considerations I could have made early on in this project that could have improved the outcome, and I am looking forward to applying these lessons learned on my next project.
 
