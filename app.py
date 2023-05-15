@@ -1,5 +1,5 @@
 import streamlit as st
-from PIL import Image
+from PIL import Image, ImageOps
 import pandas as pd
 import pickle
 import time
@@ -140,3 +140,7 @@ with left:
                 prediction = make_prediction(goalies_model, player_stats)
         formatted_prediction = format_currency(prediction)
         st.write(f"Predicted Contract Value: {formatted_prediction}")
+
+with right:
+    # Display image
+    st.image(Image.open('assets/nhl-faceoff.jpg'), use_column_width=True)
