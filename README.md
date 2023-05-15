@@ -1,79 +1,55 @@
-# Capstone Project
+# Predicting NHL Player Salary
+Analysis by Charles Ramey for General Assembly Data Science Immersive Course - Capstone Project
 
 Your Capstone project is the culmination of your time at GA. You will be tasked with developing an interesting question, collecting the data required to model that data, developing the strongest model (or models) for prediction, and communicating those findings to other data scientists and non-technical individuals. This introductory document lays out the five check-ins for the project and their due dates.
 
-## Your Deliverables
+### Problem Statement
 
-- A well-made predictive model using either structured or unstructured machine learning techniques (or other technique approved in advanced by the instructors), as well as clean, well-written code.
-- A technical report aimed at fellow data scientists that explains your process and findings.
-- A public presentation of your findings aimed primarily at laypeople.
+In the National Hockey League (NHL), team executives lack a robust, data-driven solution to estimate player salaries, which hinder's their ability to perform effective roster building and financial planning. This stems from the inherent complexity of factors that drive player salaries, including their performance, the quality of the team's they have played for, and the value of contracts signed by similar players. This project seeks to design a data-driven approach that can leverage historical data and advanced modeling techniques to help NHL executives balance their budgets, invest in their rosters, and remain competitive within the league.
 
-### **[Capstone, Part 1: Topic Ideas](./part_01/)**
+---
 
-Get started by choosing **three potential topics**.  might be a domain you are familiar with, a particular interest you have, something that affects a community you are involved in, or an area that relates to a field you wish to work in.
+### Summary
 
-One of the best ways to get feedback on your ideas quickly is to share them with others. That's why for Part 1 of your Capstone project, you'll share three potential topics.
+Data was collected from various websites including [CapFriendly](https://www.capfriendly.com/), [MoneyPuck](https://moneypuck.com/), and [Hockey Reference](https://www.hockey-reference.com/). The data was scraped using Selenium WebDriver version 4.8.2 with the Google Chrome WebDriver manager. Historical contract signings dating from the conclusion of the 2010-11 season through the end of 2022 were scraped from CapFriendly, along with salary cap limits and active contracts through present day. Player stats, including stats for forwards, defensemen, and goalies were collected from MoneyPuck from the 2010-11 season through the 2022-23 season. Historical team standings were scraped from Hockey-Reference from the 2010-11 season through the 2022-23 season.
 
-**The ultimate choice of topic for your capstone project is yours!** However, this is research and development work. Sometimes projects that look easy can be difficult and vice versa. It never hurts to have a second (or third) option available. Not sure where to start? Need some inspiration? Check out some past student capstone projects at the bottom of this README: [CLICK HERE](#example-projects)
+The vast majority of contracts signed are at or near the minimum salary, with fewer players earning higher-paying contracts. Team standing generally appears to have little impact on skater salaries, but a more noticeable impact on goalie salaries. Offensive stats like points are correlated to contract values for both forwards and defensemen, confirming that defensemen are a valuable asset in the NHL. Additionally, while contracts for skaters have generally increased as the NHL's salary cap limit has increase, salaries for goalies have remained relatively steady.
 
-- **Goal**: Share three potential topics and/or potential sources of data.
-- **Due**: **Monday, 17 April 2023**.
+Models were trained separately for forwards, defense, and goalies based on the assumption that different stats drive contract value for each position. Several models were tested for each dataset, including linear regression, various tree methods, and ensemble models. For each dataset, the linear regression model performed the best, though performance was not spectacular, scoring a 0.80 on the training data and a 0.78 on the test data for forwards, but decreasing to 0.65 and 0.45 respectively for goalies.
 
+This project also contains a [streamlit web application](https://nhl-salary-predictor.onrender.com/) that implements the models trained for each position to predict player value for the upcoming 2023-24 season based on their performance in the 2022-23 season. The app is still in development and not yet optimized.
 
-### **Capstone, Part 1.5:**
+---
 
-In [this Google Sheet](https://docs.google.com/spreadsheets/d/1OShtZSiaWIzLOJVVRs8yEkHNLqvNa4Sps4Jj7D5OQaM/edit?usp=sharing) share your **one-sentence** problem statement **and** whether you have your dataset in hand.
-- **Due**: **Friday, 21 April 2023**
+### Conclusion and Recommendations
 
-### **[Capstone, Part 2: Problem Statement + EDA](./part_02/)**
+This project was designed to create a simple tool for predicting NHL player salary, an inherently complex and often intangible process. I was able to create such a tool, however, the complexity of the challenge combined with the fact that there are realistically only a couple thousand player signings in the last decade creates a significant obstalce to achieving a highly accurate salary prediction tool. The pitfalls are amplified for goalies, for whom there is even less data. Even if steps are taken to minimize the amount of data points that are removed (for example, choosing to include 2-way contracts, or expanding the analysis further back than 2010), the number of signings is still limited. Another major pitfall of this project is that the target variable is inherently time-dependent (salaries generally increase with time), yet the salary of an indivual player cannot be predicted using a time-series analysis due to the inherent independence of a single player's stats and salary. 
 
-For Part 2, provide a clear statement of the problem that you have chosen and an overview of your approach to solving that problem. Summarize your objectives, goals & success metrics, and any risks & assumptions. Outline your proposed methods and models, perform your initial EDA, and summarize the process. **Your data should be in hand by this point in the process!**
+There are many avenues to continue to explore with this data, and additional steps can be taken outside of the time contraints of the General Assembly capstone project to further improve model performance and the user experience with the web application. Some recommendations and planned next steps include:
+- Exploring the bimodality of the logarithmically transformed contract data.
+- Training on the combined forwards and defense datasets.
+    - These were originally trained separetly under the assumption that the different play style of forwards and defensemen would require unique models for each. Keeping this data combined allows the model to learn from more data and may improve model performance.
+- Adjusting the data to a per-game basis.
+    - For this iteration, data was left as is. A potential issue with this is that a player who played 60 games is likely to have relatively lower stats than if they played a full 82 games. The model does not account for partial seasons which may be a major hindrance to performance.
+- Testing a wider variety of model hyperparameters
+    - A more through grid search of hyperparameters for the various models may reveal more optimal paramters that improve model performance.
+    
+Overall, I learned a lot through this project, particularly about webscraping with Selenium, but also about experimental design. I believe there are multiple considerations I could have made early on in this project that could have improved the outcome, and I am looking forward to applying these lessons learned on my next project.
 
-**Again, your data should be in hand by now!**
+---
 
-- **Goal**: Describe your proposed approach and summarize your initial EDA in a document you push to your GitHub repo.
-- **Due**: **Friday, 28 April 2023**
+### Sources
 
-### **[Capstone, Part 3: Progress Report + Preliminary Findings](./part_03/)**
-
-In Part 3, you'll create a progress report of your work to get feedback along the way. Describe your approach, initial results, and any setbacks or lessons learned so far. Your report should include updated visual and statistical analysis of your data. You’ll also meet with your instructional team to get feedback on your results so far!
-
-- **Goal**: Discuss progress and setbacks, include visual and statistical analysis, in your GitHub repo.
-- **Due**: **Friday, 5 May 2023**
-
-### **[Capstone, Part 4: Report Writeup + Technical Analysis](./part_04/)**
-
-Your goal for Part 4 is to develop a technical document (in the form of Jupyter notebook) that could be shared with your peers.
-
-Document your research and analysis including a summary, an explanation of your modeling approach as well as the strengths and weaknesses of any variables in the process. You should provide insight into your analysis, using best practices like cross validation or applicable prediction metrics.
-
-- **Goal**: Detailed report and code with a summary of your statistical analysis, model, and evaluation metrics.
-- **Due**: **Thursday, 11 May 2023**
-
-### **[Capstone, Part 5: Presentation + Recommendations](./part_05/)**
-
-Whether during an interview or as part of a job, you will frequently have to present your findings to business partners and other interested parties - many of whom won't know anything about data science! That's why for Part 5, you'll create a presentation of your previous findings with a semi-technical audience in mind.
-
-You should already have the analytical work complete, so now it's time to clean up and clarify your findings. Create a slide deck that explains your data, visualizes your model, describes your approach, articulates strengths and weaknesses, and presents specific recommendations. Be prepared to explain and defend your model to an inquisitive audience! An interactive app is a great addition to your project.
-
-- **Goal**: Detailed presentation deck that relates your data, model, and findings to a non-technical audience.
-- **Due**: **Monday, 15 May 2023**
-
-<a name="example-projects"></a>
-### Example Projects
-
-Below are some great capstone projects submitted by past DSI students!
-
-* [Kenya Chauche, DSI-10](https://github.com/KenyaChauche/sonnet-generation) built a natural language generation program trained on Shakespeare's sonnets
-* [Molly Baird, DSI-11](https://github.com/mollycbaird/ComputerVisionSET) wanted to computerize the game of SET, and succeeded admirably
-* [Daniel Johnston, DSI-2](https://github.com/djkjohnston/ML_from_scratch_GA_DSI_Capstone) built several key machine learning algos from scratch in python, comparing their performance to the scikit-learn implementations.  
-* [Alex Schultz, DSI-3](https://github.com/fullquartpress/DSI-Capstone) predicts spot coffee (commodity coffee bean) price changes from sentiment analysis of an industry trade publication.  
-* [Brice Walker, DSI-3](https://github.com/bricewalker/Hey-Jetson) wanted to play with his Jetson GPU and built voice transcription _from scratch_.  
-* [Caitlin Streamer, DSI-4](https://github.com/c-streams/Pneumonia) worked on a Kaggle dataset to predict pneumonia from chest X-rays.  
-* [Brian Osgood, DSI-04](https://github.com/osgoodbl/PyFilter) built a bot that crawls twitter and identifies whether an image tagged 'lamborghini' is actually a lamborghini.  
-* [Frank Turner, DSI-04](https://github.com/frankturnerv/Fashioning_Models_from_Fashion_Models) uses image recognition to identify the colors used in a fashion season's palette.  
-* [DSI-06, team](https://github.com/balak4/Optimizing-Evac-Routes) This is actually the DSI-6 group project. It's here because it's really, really impressive.  
-* [Amy Taylor, DSI-06](https://github.com/amytaylor330/CNN_for_Dance_Music_Classification_repost) wanted to quantify the difference between types of dance music.  
-* [Veronica Giannotta, DSI-06](https://github.com/vgiannotta/Emotional-Impacts-of-Viral-Content) delved into the dark side of the internet and evaluated the emotional sentiment of social media content that goes viral.
-* [Derek Steffan, DSI-07](https://github.com/dsteffan/twitch_chat_analysis) automates the process of creating twitch highlight reels using sentiment analysis, markov chains, and Bayesian analysis.  
-* [Sebastian Alvis, League of Legends](https://github.com/salvis2/SpringboardAlvis/tree/master/capstone_project_1) Not a GA capstone, but a very compelling case for applying data science to your interests to come up with a good capstone.
+1. [https://www.sportingnews.com/us/nhl/news/nhl-salary-cap-rules-explained/x1wwiew656afzelhsx4tnecz](https://www.sportingnews.com/us/nhl/news/nhl-salary-cap-rules-explained/x1wwiew656afzelhsx4tnecz)
+2. [https://www.capfriendly.com/players/nazem-kadri](https://www.capfriendly.com/players/nazem-kadri)
+3. [https://www.nhl.com/player/nazem-kadri-8475172](https://www.nhl.com/player/nazem-kadri-8475172)
+4. [https://www.nhl.com/news/nazem-kadri-signs-seven-year-contract-with-flames/c-335317582](https://www.nhl.com/news/nazem-kadri-signs-seven-year-contract-with-flames/c-335317582)
+5. [https://www.capfriendly.com/](https://www.capfriendly.com/)
+6. [https://moneypuck.com/](https://moneypuck.com/)
+7. [https://www.hockey-reference.com/](https://www.hockey-reference.com/)
+8. [https://selenium-python.readthedocs.io/index.html](https://selenium-python.readthedocs.io/index.html)
+9. [https://pandas.pydata.org/docs/index.html](https://pandas.pydata.org/docs/index.html)
+10. [https://en.wikipedia.org/wiki/List_of_NHL_seasons](https://en.wikipedia.org/wiki/List_of_NHL_seasons)
+11. [https://chat.openai.com/](https://chat.openai.com/)
+12. [https://matplotlib.org/stable/api/index.html](https://matplotlib.org/stable/api/index.html)
+13. [https://scikit-learn.org/stable/modules/classes.html](https://scikit-learn.org/stable/modules/classes.html)

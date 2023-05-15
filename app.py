@@ -23,17 +23,27 @@ st.set_page_config(
 st.title("NHL Player Salary Predictor")
 
 """
-In the National Hockey League (NHL), team executives lack a robust, data-driven solution to 
-forecasting player salaries, which hinder's their ability to perform effective roster building 
-and financial planning. This stems from the inherent complexity of factors that drive player salaries,
-including their performance, the quality of the team's they have played for, how long they 
-have played, and the value of contracts signed by similar players. This project seeks to design
-a data-driven approach that can leverage historical data and advanced modeling techniques to 
-help NHL executives balance their budgets, invest in their rosters, and remain competitive within
-the league.
+In the National Hockey League (NHL), team executives lack a robust, data-driven solution to estimate
+player salaries, which hinder's their ability to perform effective roster building and financial planning. 
+This stems from the inherent complexity of factors that drive player salaries, including their performance, 
+the quality of the team's they have played for, and the value of contracts signed by similar players. 
+This project sought to design a data-driven approach that can leverage historical data and advanced modeling 
+techniques to help NHL executives balance their budgets, invest in their rosters, and remain competitive 
+within the league.
 
-By entering a player's name, you can generate the predicted average annual contract value
-for that player for the upcoming 2023-24 season based on their performance in the 2022-23 season.
+This web app allows you to predict the average annual value of a player's contract for the upcoming 2023-24 season,
+taking into account their performance in the 2022-23 season. The app uses a linear regression model trained on
+historical player data to make the predictions. The model was trained on data from the 2010-11 season through the 2019-20
+season and tested on contracts from the 2020-21 season and 2021-22 season.
+
+Please note that his app is still in development and is not yet optimized. The predictions are not guaranteed to be accurate.
+
+If you have any questions or feedback, please contact me at charlesjramey@gmail.com or through [LinkedIn](https://www.linkedin.com/in/charlesjramey/)
+
+Enjoy!
+
+
+---
 """
 
 left, right = st.columns(2)   
