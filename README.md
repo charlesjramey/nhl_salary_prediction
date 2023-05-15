@@ -1,7 +1,7 @@
 # Predicting NHL Player Salary
 Analysis by Charles Ramey for General Assembly Data Science Immersive Course - Capstone Project
 
-Your Capstone project is the culmination of your time at GA. You will be tasked with developing an interesting question, collecting the data required to model that data, developing the strongest model (or models) for prediction, and communicating those findings to other data scientists and non-technical individuals. This introductory document lays out the five check-ins for the project and their due dates.
+---
 
 ### Problem Statement
 
